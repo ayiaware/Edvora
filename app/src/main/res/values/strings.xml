@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Edvora</string>
+    <string name="label_nearest">Nearest </string>
+    <string name="label_upcoming">Upcoming</string>
+    <string name="label_past">Past </string>
+    <string name="label_filters">Filters</string>
+    <string name="label_rides">Rides</string>
+
+    <string name="label_rides_colon">Rides : </string>
+
+
+    <string name="label_ride_id_colon">Ride Id : <b><i>%1$d</i></b></string>
+    <string name="label_origin_station_colon">Origin Station : <b>%1$d</b></string>
+    <string name="label_station_path_colon">Station Path : <b>%1$s</b></string>
+    <string name="label_date_colon">Date : <b>%1$s</b></string>
+    <string name="label_distance_colon">Distance : <b>%1$d</b></string>
+
+</resources>

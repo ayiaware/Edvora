@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="ride"
+            type="com.ayia.rider.model.Ride" />
+
+        <variable
+            name="viewModel"
+            type="com.ayia.rider.MainViewModel" />
+
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentPadding="22dp"
+        app:cardCornerRadius="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        app:cardBackgroundColor="@color/color2"
+        app:cardElevation="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivMap"
+                android:layout_width="match_parent"
+                android:layout_height="148dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:setMapImage="@{ride.map_url}"
+                tools:srcCompat="@color/teal_200" />
+
+
+            <TextView
+                android:id="@+id/tvCityName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_filter_info"
+                android:gravity="center"
+                android:textSize="12sp"
+                tools:text="City Name"
+                android:text="@{ride.city}"
+                app:layout_constraintTop_toBottomOf="@id/ivMap"
+                app:layout_constraintStart_toStartOf="@id/ivMap"
+                android:layout_marginTop="21dp" />
+
+
+            <TextView
+                android:id="@+id/tvStateName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_filter_info"
+                android:gravity="center"
+                android:textSize="12sp"
+                tools:text="State Name"
+                android:text="@{ride.state}"
+                app:layout_constraintTop_toTopOf="@id/tvCityName"
+                app:layout_constraintEnd_toEndOf="@id/ivMap" />
+
+            <LinearLayout
+                android:id="@+id/lRideId"
+                style="@style/InfoLayoutStyle"
+                app:layout_constraintTop_toBottomOf="@id/tvCityName"
+                app:layout_constraintStart_toStartOf="@id/ivMap"
+                app:layout_constraintEnd_toEndOf="@id/ivMap"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    style="@style/InfoTextStyle"
+                    tools:text="Ride Id : "
+                    android:text="@{@string/label_ride_id_colon(ride.id)}" />
+
+                <TextView
+                    style="@style/InfoTextStyle"
+                    tools:text="Origin Station : "
+                    android:text="@{@string/label_origin_station_colon(ride.origin_station_code)}"
+                    />
+
+                <TextView
+                    style="@style/InfoTextStyle"
+                    tools:text="Station Path : [20, 39, 40, 42, 54, 63, 72, 88, 98]"
+                    android:text="@{@string/label_station_path_colon(String.valueOf(ride.station_path))}"
+
+                    />
+
+                <TextView
+                    style="@style/InfoTextStyle"
+                    tools:text="Date : 15th Feb 2022 16:33"
+                    android:textSize="18sp"
+                    android:text="@{@string/label_date_colon(ride.date)}"
+                    />
+
+                <TextView
+                    style="@style/InfoTextStyle"
+                    tools:text="Distance : 0"
+                    android:text="@{@string/label_distance_colon(Math.abs(ride.destination_station_code - viewModel.userResponse.user.station_code))}"
+
+                    />
+            </LinearLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+</layout>
