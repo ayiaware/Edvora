@@ -8,5 +8,10 @@ const val RIDES_ENDPOINT = "rides"
 const val USER_ENDPOINT = "user"
 
 
-const val QUERY_KEY_FILTER_SORT = "filter_sort_query"
-const val QUERY_KEY_CITY = "city_query"
+const val FILTER_KEY_NEAREST = "filter_nearest"
+const val FILTER_KEY_FUTURE = "filter_future"
+const val FILTER_KEY_PAST = "filter_past"
+
+
+const val FILTER_TYPE_CITY = "city"
+const val FILTER_TYPE_STATE = "state"

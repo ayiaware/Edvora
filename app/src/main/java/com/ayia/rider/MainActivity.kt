@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 
 import com.ayia.rider.databinding.ActivityMainBinding
-import com.ayia.rider.ui.main.ViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 

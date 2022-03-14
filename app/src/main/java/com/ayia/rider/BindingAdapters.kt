@@ -2,6 +2,8 @@ package com.ayia.rider
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
@@ -33,5 +35,11 @@ fun setMapImage(iv:ImageView, url:String?){
 @BindingAdapter("app:isNotGone")
 fun isNotGone(view: View, show: Boolean) {
     view.visibility = if (show) View.VISIBLE else View.GONE
+}
+
+@BindingAdapter("setFormattedText")
+fun setFormattedText(view: TextView, text: String) {
+    val styledText: CharSequence = HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY)
+    view.text = styledText
 }
 

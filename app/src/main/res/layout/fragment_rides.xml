@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:background="?android:windowBackground"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="6dp"
         android:id="@+id/layout"
         >
 
@@ -33,6 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             style="@style/TabLayoutStyle"
+            app:tabMode="scrollable"
             app:layout_constraintEnd_toStartOf="@id/tvFiltersLabel"
             app:layout_constraintStart_toEndOf="@id/tvRidesLabel"
             app:layout_constraintTop_toTopOf="parent"

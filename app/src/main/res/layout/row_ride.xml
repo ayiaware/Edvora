@@ -81,18 +81,18 @@
                 <TextView
                     style="@style/InfoTextStyle"
                     tools:text="Ride Id : "
-                    android:text="@{@string/label_ride_id_colon(ride.id)}" />
+                    setFormattedText="@{@string/label_ride_id_colon(ride.id)}" />
 
                 <TextView
                     style="@style/InfoTextStyle"
                     tools:text="Origin Station : "
-                    android:text="@{@string/label_origin_station_colon(ride.origin_station_code)}"
+                    setFormattedText="@{@string/label_origin_station_colon(ride.origin_station_code)}"
                     />
 
                 <TextView
                     style="@style/InfoTextStyle"
                     tools:text="Station Path : [20, 39, 40, 42, 54, 63, 72, 88, 98]"
-                    android:text="@{@string/label_station_path_colon(String.valueOf(ride.station_path))}"
+                    setFormattedText="@{@string/label_station_path_colon(String.valueOf(ride.station_path))}"
 
                     />
 
@@ -100,13 +100,13 @@
                     style="@style/InfoTextStyle"
                     tools:text="Date : 15th Feb 2022 16:33"
                     android:textSize="18sp"
-                    android:text="@{@string/label_date_colon(ride.date)}"
+                    setFormattedText="@{@string/label_date_colon(ride.date)}"
                     />
 
                 <TextView
                     style="@style/InfoTextStyle"
                     tools:text="Distance : 0"
-                    android:text="@{@string/label_distance_colon(Math.abs(ride.destination_station_code - viewModel.userResponse.user.station_code))}"
+                    setFormattedText="@{@string/label_distance_colon(Math.abs(ride.destination_station_code - viewModel.userResponse.user.station_code))}"
 
                     />
             </LinearLayout>

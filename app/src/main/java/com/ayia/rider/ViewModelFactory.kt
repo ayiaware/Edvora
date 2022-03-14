@@ -1,11 +1,10 @@
-package com.ayia.rider.ui.main
+package com.ayia.rider
 
 import android.os.Bundle
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
-import com.ayia.rider.MainViewModel
 import com.ayia.rider.data.DataRepository
 
 class ViewModelFactory(

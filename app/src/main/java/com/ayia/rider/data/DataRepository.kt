@@ -32,20 +32,28 @@ class DataRepository {
         call?.enqueue(object : Callback<List<Ride>?> {
             override fun onResponse(call: Call<List<Ride>?>, response: Response<List<Ride>?>) {
 
-                Timber.tag(TAG).d("onResponse  isSuccessful ${response.isSuccessful} Response ${response}")
+                Timber.tag(TAG).d("onResponse  isSuccessful ${response.isSuccessful} Response $response")
 
                 if (response.isSuccessful) {
 
                     ridesLiveData.postValue(RidesApiResponse(rides = response.body()))
 
                 }
+                else {
+
+                    Timber.tag(TAG).d(" Error ${response.errorBody().toString()}")
+
+                    ridesLiveData.postValue(RidesApiResponse(error = response.errorBody().toString()))
+
+                }
+
             }
 
             override fun onFailure(call: Call<List<Ride>?>, t: Throwable) {
 
                 Timber.tag(TAG).d("onFailure Error $t")
 
-                ridesLiveData.postValue(RidesApiResponse(error = t))
+                ridesLiveData.postValue(RidesApiResponse(error = t.localizedMessage))
             }
         })
 
@@ -62,11 +70,18 @@ class DataRepository {
         call?.enqueue(object : Callback<User?> {
             override fun onResponse(call: Call<User?>, response: Response<User?>) {
 
-                Timber.tag(TAG).d("onResponse  isSuccessful ${response.isSuccessful} Response ${response}")
+                Timber.tag(TAG).d("onResponse  isSuccessful ${response.isSuccessful} Response $response")
 
                 if (response.isSuccessful) {
 
                     userLiveData.postValue(UserApiResponse(user = response.body()))
+
+                }
+                else {
+
+                    Timber.tag(TAG).d("User error ${response.errorBody().toString()}")
+
+                    userLiveData.postValue(UserApiResponse(error ="User error ${response.errorBody().toString()}"))
 
                 }
             }
@@ -75,7 +90,7 @@ class DataRepository {
 
                 Timber.tag(TAG).d("onFailure Error $t")
 
-                userLiveData.postValue(UserApiResponse(error = t))
+                userLiveData.postValue(UserApiResponse(error = t.localizedMessage))
             }
         })
 
