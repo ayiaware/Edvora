@@ -9,20 +9,35 @@ import com.ayia.rider.model.Option
 import com.ayia.rider.model.Ride
 import timber.log.Timber
 
-class MainViewModel (repository : DataRepository,
+class MainViewModel (private val repository : DataRepository,
                      private val savedStateHandle: SavedStateHandle) : ViewModel()  {
 
     private val TAG: String =
         GLOBAL_TAG + " " + MainViewModel::class.java.simpleName
 
-
     private val defaultFilter = arrayOf("", "")
 
-    var filter = Filter("", "")
+    var filterNearestRides = Filter("", "")
+    var filterFutureRides = Filter("", "")
+    var filterPastRides = Filter("", "")
 
-    val userResponse = repository.getUserMutableLiveData()
+    val userResponse = repository.userLiveData
 
-    private val ridesApiResponse =  repository.getRidesMutableLiveData()
+    private val ridesApiResponse =  repository.ridesLiveData
+
+    init {
+        refresh()
+    }
+
+
+    fun refresh(){
+
+        repository.loadUserMutableLiveData()
+        repository.loadRidesMutableLiveData()
+
+    }
+
+
 
 
     val nearestRides : MutableLiveData<RidesApiResponse> = savedStateHandle.getLiveData(
@@ -78,7 +93,7 @@ class MainViewModel (repository : DataRepository,
                             }
                         }
 
-                        MutableLiveData(RidesApiResponse(list.sortedBy { it.destination_station_code - user.station_code }))
+                        MutableLiveData(RidesApiResponse(list.sortedBy { it.station_path.contains(user.station_code)}))
 
                     } else {
                         Timber.tag(TAG).d("Rides is null Error ${ridesResponse.error}")
@@ -160,18 +175,13 @@ class MainViewModel (repository : DataRepository,
                                 }
 
                             }
-
                         }
 
                         futureRidesCount.value = list.size
-
                         MutableLiveData(RidesApiResponse(list.sortedBy { getMilliFromDate(it.date) }))
-
-
 
                     } else {
                         Timber.tag(TAG).d("Rides is null Error ${ridesResponse.error}")
-
                         MutableLiveData(ridesResponse)
                     }
 
@@ -211,8 +221,6 @@ class MainViewModel (repository : DataRepository,
                 ridesApiResponse.switchMap { ridesResponse ->
 
                     if (ridesResponse.rides != null) {
-
-                        Timber.tag(TAG).d("Rides count ${ridesResponse.rides.size}")
 
                         val list = mutableListOf<Ride>()
 
@@ -313,26 +321,40 @@ class MainViewModel (repository : DataRepository,
 
     fun setFilter(tabPosition :Int, option: Option){
 
-
-        when (option.type) {
-            FILTER_TYPE_STATE -> {
-                filter.state = option.value
-            }
-            else -> {
-                filter.city = option.value
-            }
-        }
-
         when(tabPosition){
 
             0 ->{
-                savedStateHandle[FILTER_KEY_NEAREST] = arrayOf(filter.state, filter.city)
+                when (option.type) {
+                    FILTER_TYPE_STATE -> {
+                        filterNearestRides.state = option.value
+                    }
+                    else -> {
+                        filterNearestRides.city = option.value
+                    }
+                }
+                savedStateHandle[FILTER_KEY_NEAREST] = arrayOf(filterNearestRides.state, filterNearestRides.city)
             }
             1 -> {
-                savedStateHandle[FILTER_KEY_FUTURE] = arrayOf(filter.state, filter.city)
+                when (option.type) {
+                    FILTER_TYPE_STATE -> {
+                        filterFutureRides.state = option.value
+                    }
+                    else -> {
+                        filterFutureRides.city = option.value
+                    }
+                }
+                savedStateHandle[FILTER_KEY_FUTURE] = arrayOf(filterFutureRides.state, filterFutureRides.city)
             }
             2 -> {
-                savedStateHandle[FILTER_KEY_PAST]  = arrayOf(filter.state, filter.city)
+                when (option.type) {
+                    FILTER_TYPE_STATE -> {
+                        filterPastRides.state = option.value
+                    }
+                    else -> {
+                        filterPastRides.city = option.value
+                    }
+                }
+                savedStateHandle[FILTER_KEY_PAST]  = arrayOf(filterPastRides.state, filterPastRides.city)
             }
         }
 

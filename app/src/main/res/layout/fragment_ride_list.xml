@@ -14,6 +14,11 @@
             name="isEmpty"
             type="boolean" />
 
+        <variable
+            name="hasError"
+            type="boolean" />
+
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,6 +39,41 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:elevation="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:isNotGone="@{isEmpty &amp; !isLoading &amp; hasError}"
+            android:gravity="center"
+            android:padding="16dp"
+            >
+
+            <TextView
+                android:id="@+id/tvError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/msg_check_your_network_connection"
+
+                />
+
+            <Button
+                android:id="@+id/btnRetry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_retry"
+                android:textColor="@color/white"
+                android:layout_marginTop="16dp"
+                />
+
+        </LinearLayout>
 
 
 

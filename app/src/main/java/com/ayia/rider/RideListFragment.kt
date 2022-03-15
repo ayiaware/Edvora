@@ -66,6 +66,12 @@ class RideListFragment : Fragment() {
                 else -> mainViewModel.pastRides
             }
         )
+
+        binding.btnRetry.setOnClickListener {
+
+            binding.isLoading = true
+            mainViewModel.refresh()
+        }
     }
 
     private fun submitListToUi(response: LiveData<RidesApiResponse>){
@@ -84,6 +90,7 @@ class RideListFragment : Fragment() {
             else {
 
                 binding.isEmpty = true
+                binding.hasError = true
 
                 Timber.tag(TAG).d("rides != null true Error ${it.error}")
 

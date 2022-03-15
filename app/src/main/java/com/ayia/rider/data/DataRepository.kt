@@ -23,7 +23,7 @@ class DataRepository {
     val userLiveData = MutableLiveData<UserApiResponse>()
 
 
-    fun getRidesMutableLiveData(): MutableLiveData<RidesApiResponse> {
+    fun loadRidesMutableLiveData() {
 
         val endpoint: ApiService? = RetrofitInstance().getRetrofitService()
 
@@ -57,11 +57,10 @@ class DataRepository {
             }
         })
 
-        return ridesLiveData
     }
 
 
-    fun getUserMutableLiveData(): MutableLiveData<UserApiResponse> {
+    fun loadUserMutableLiveData(){
 
         val endpoint: ApiService? = RetrofitInstance().getRetrofitService()
 
@@ -94,7 +93,6 @@ class DataRepository {
             }
         })
 
-        return userLiveData
     }
 
 }
